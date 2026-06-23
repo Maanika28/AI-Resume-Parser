@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Parser</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        <i class="fa-solid fa-file-lines"></i>
+        AI Resume Parser
+    </h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+
+            <input type="file" name="resume" required>
+
+            <textarea
+                name="job_description"
+                rows="5"
+                placeholder="Enter Job Skills (Python, SQL, Machine Learning, Flask, Java)">
+            </textarea>
+
+            <button type="submit">
+                <i class="fa-solid fa-upload"></i>
+                Upload Resume
+            </button>
+
+        </div>
+
+    </form>
+
+    {% if result.name %}
+
+    <!-- SCORE SECTION -->
+
+    <div class="score-card">
+
+        <div class="score-box">
+
+            <h3>
+                <i class="fa-solid fa-chart-line"></i>
+                Resume Score
+            </h3>
+
+            <div class="progress">
+                <div class="progress-bar" data-score="{{ score }}"></div>
+            </div>
+
+            <p>{{ score }}/100</p>
+
+        </div>
+
+        <div class="score-box">
+
+            <h3>
+                <i class="fa-solid fa-comments"></i>
+                Feedback
+            </h3>
+
+            <p>{{ feedback }}</p>
+
+        </div>
+
+        <div class="score-box">
+
+            <h3>
+                <i class="fa-solid fa-bullseye"></i>
+                Job Match Score
+            </h3>
+
+            <div class="progress">
+                <div class="progress-bar" data-score="{{ job_match }}"></div>
+            </div>
+
+            <p>{{ job_match }}%</p>
+
+        </div>
+
+    </div>
+
+    <!-- PERSONAL DETAILS -->
+
+    <div class="card">
+
+        <h2>
+            <i class="fa-solid fa-user"></i>
+            Personal Details
+        </h2>
+
+        <p><strong>Name:</strong> {{ result.name }}</p>
+        <p><strong>Email:</strong> {{ result.email }}</p>
+        <p><strong>Phone:</strong> {{ result.phone }}</p>
+
+    </div>
+
+    <!-- SKILLS -->
+
+    <div class="card">
+
+        <h2>
+            <i class="fa-solid fa-code"></i>
+            Skills
+        </h2>
+
+        <ul class="skills-list">
+            {% for skill in result.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <!-- EDUCATION -->
+
+    <div class="card">
+
+        <h2>
+            <i class="fa-solid fa-graduation-cap"></i>
+            Education
+        </h2>
+
+        <ul>
+            {% for edu in result.education %}
+                <li>{{ edu }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+document.querySelectorAll(".progress-bar").forEach(bar => {
+
+    const score = bar.getAttribute("data-score") || 0;
+
+    bar.style.width = score + "%";
+
+});
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+Maanika
+
+Email: maanika123@gmail.com
+Phone: 9876543210
+
+Education:
+B.E Information Science
+
+Skills:
+Python
+Java
+SQL
+HTML
+CSS
+JavaScript
+Machine Learning
+Flask
