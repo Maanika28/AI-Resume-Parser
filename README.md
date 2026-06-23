@@ -22,13 +22,6 @@ templates/
 static/
 resumes/
 
-Author
-Maanika28
 
 
 
-### Step 5
-In the commit message box type:
-
-```text
-Updated README
